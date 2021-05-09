@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "booknotes4bb72156": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
