@@ -4,8 +4,13 @@
 	</form>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+	name: 'AppForm'
+})
+</script>
+
 <style lang="scss">
-	.c-form {
-		background-color: green;
-	}
+
 </style>

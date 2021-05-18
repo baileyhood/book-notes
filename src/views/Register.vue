@@ -1,26 +1,33 @@
 <template>
 	<div class="container">
-		<form @submit.prevent="register">
-			<h2>Register</h2>
-			<input
+		<AppForm @submit.prevent="register">
+			<AppInput 
 				type="email"
 				v-model="email"
-				placeholder="Email address..."
+				placeholder="Enter email address"
 			/>
-			<input
+			{{ email }}
+			<AppInput
 				type="password"
 				v-model="password"
-				placeholder="password..."
+				placeholder="Enter password"
 			/>
+			{{password}}
 			<button>Register</button>
-		</form>
+		</AppForm>
 	</div>
 </template>
 
 <script>
 import { Auth } from 'aws-amplify';
+import AppForm from '@/components/AppForm';
+import AppInput from '@/components/AppInput';
 
 export default {
+	components: {
+		AppForm,
+		AppInput
+	},
 	data() {
 		return {
 			email: '',
@@ -29,6 +36,7 @@ export default {
 	},
 	methods: {
 		async register() {
+			console.log('email: ', this.email);
 			try {
 				await Auth.signUp({
 					username: this.email,
