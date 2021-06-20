@@ -10,7 +10,3 @@ export default defineComponent({
 	name: 'AppForm'
 })
 </script>
-
-<style lang="scss">
-
-</style>

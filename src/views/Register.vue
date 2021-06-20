@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
 		<AppForm @submit.prevent="register">
 			<AppInput 
 				type="email"
@@ -20,11 +21,13 @@
 
 <script>
 import { Auth } from 'aws-amplify';
+import AppHeadline from '@/components/AppHeadline.vue';
 import AppForm from '@/components/AppForm';
 import AppInput from '@/components/AppInput';
 
 export default {
 	components: {
+		AppHeadline,
 		AppForm,
 		AppInput
 	},
