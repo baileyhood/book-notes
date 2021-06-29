@@ -10,3 +10,10 @@ export default defineComponent({
 	name: 'AppForm'
 })
 </script>
+
+<style lang="scss">
+.c-form {
+	display: flex;
+	flex-direction: column;
+}
+</style>

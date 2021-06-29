@@ -1,5 +1,6 @@
 <template>
 	<input
+		class="c-input"
 		:placeholder="placeholder"
 		:type="type"
 		:value="modelValue"
@@ -29,3 +30,14 @@ export default defineComponent({
 
 })
 </script>
+
+<style lang="scss">
+.c-input {
+	border: 1px solid $color-primary-lightgrey;
+	font-family: $font-primary;
+	font-size: rem-calc(16);
+	margin-bottom: rem-calc(20);
+	padding: rem-calc(15) rem-calc(10);
+	width: 100%;
+}
+</style>
