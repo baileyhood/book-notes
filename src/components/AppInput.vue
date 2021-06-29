@@ -18,14 +18,14 @@ export default defineComponent({
 		placeholder: {
 			type: String
 		},
-		type: {
-			type: String
-		},
 		modelValue: {
 			type: String,
 			required: true,
 			default: ''
-		}
+		},
+		type: {
+			type: String
+		},
 	},
 
 })
@@ -34,10 +34,14 @@ export default defineComponent({
 <style lang="scss">
 .c-input {
 	border: 1px solid $color-primary-lightgrey;
+	color: $color-primary-grey;
 	font-family: $font-primary;
 	font-size: rem-calc(16);
 	margin-bottom: rem-calc(20);
 	padding: rem-calc(15) rem-calc(10);
-	width: 100%;
+
+	&::placeholder {
+		color: $color-primary-grey;
+	}
 }
 </style>

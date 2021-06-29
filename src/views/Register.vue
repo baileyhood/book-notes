@@ -5,52 +5,58 @@
 			<p class="p-register__text">Sign up for an account to get started with Book Notes</p>
 			<AppForm @submit.prevent="register">
 				<AppInput 
+					placeholder="Enter email address"
 					type="email"
 					v-model="email"
-					placeholder="Enter email address"
 				/>
-				{{ email }}
 				<AppInput
+					id="register-password-input"
+					placeholder="Enter password*"
 					type="password"
 					v-model="password"
-					placeholder="Enter password"
+					label="*must be at least 8 characters and include 1 special character"
 				/>
-				{{password}}
-				<button>Register</button>
+				<label class="p-register__label" for="register-password-input">*must be at least 8 characters and include 1 special character</label>
+				<AppButton level="primary">Register</AppButton>
 			</AppForm>
+			<MessageSuccess v-if="userIsRegistered" />
 		</AppCard>
 	</div>
 </template>
 
 <script>
 import { Auth } from 'aws-amplify';
+import AppButton from '@/components/AppButton.vue';
 import AppCard from '@/components/AppCard.vue';
 import AppHeadline from '@/components/AppHeadline.vue';
 import AppForm from '@/components/AppForm';
 import AppInput from '@/components/AppInput';
+import MessageSuccess from '@/components/MessageSuccess';
 
 export default {
 	components: {
+		AppButton,
 		AppCard,
 		AppHeadline,
 		AppForm,
-		AppInput
+		AppInput,
+		MessageSuccess
 	},
 	data() {
 		return {
 			email: '',
-			password: ''
+			password: '',
+			userIsRegistered: false
 		}
 	},
 	methods: {
 		async register() {
-			console.log('email: ', this.email);
 			try {
 				await Auth.signUp({
 					username: this.email,
 					password: this.password,
 				});
-				alert('User successfully registered. Please login');
+				this.userIsRegistered = true;
 			} catch (error) {
 				alert(error.message);
 			}
@@ -69,9 +75,15 @@ export default {
 		margin-top: rem-calc(100);
 	}
 
+	&__label {
+		font-size: rem-calc(14);
+		font-style: italic;
+		margin-bottom: rem-calc(40);
+	}
+
 	&__text {
 		margin-bottom: rem-calc(30);
-		max-width: 250px;
+		max-width: 280px;
 		margin-left: auto;
 		margin-right: auto;
 	}

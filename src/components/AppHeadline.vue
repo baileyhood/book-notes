@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss">
 .c-headline-1 {
-	font-size: rem-calc(55);
+	font-size: rem-calc(50);
 }
 
 .c-headline-divider {
