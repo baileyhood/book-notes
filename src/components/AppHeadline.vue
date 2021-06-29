@@ -60,8 +60,10 @@ export default {
 		content: '';
 		height: 1px;
 		left: 0;
+		margin: 0 auto;
 		max-width: 125px;
 		position: absolute;
+		right: 0;
 		width: 100%;
 	}
 }
