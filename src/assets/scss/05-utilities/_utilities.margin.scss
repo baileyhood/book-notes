@@ -1,0 +1,23 @@
+$margins: (0, 5, 10, 12, 15, 20, 25, 30, 35, 40, 50, 60);
+
+@each $margin in $margins {
+	.u-margin-#{$margin} {
+		margin: rem-calc($margin);
+	}
+
+	.u-margin-top-#{$margin} {
+		margin-top: rem-calc($margin);
+	}
+
+	.u-margin-right-#{$margin} {
+		margin-right: rem-calc($margin);
+	}
+
+	.u-margin-bottom-#{$margin} {
+		margin-bottom: rem-calc($margin);
+	}
+
+	.u-margin-left-#{$margin} {
+		margin-left: rem-calc($margin);
+	}
+}

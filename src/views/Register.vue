@@ -2,8 +2,8 @@
 	<div class="p-register">
 		<AppCard class="p-register__card">
 			<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
-			<p class="p-register__text">Sign up for an account to get started with Book Notes</p>
-			<AppForm @submit.prevent="register">
+			<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
+			<AppForm v-if="!formWasSubmitted" @submit.prevent="register">
 				<AppInput 
 					placeholder="Enter email address"
 					type="email"
@@ -19,7 +19,8 @@
 				<label class="p-register__label" for="register-password-input">*must be at least 8 characters and include 1 special character</label>
 				<AppButton level="primary">Register</AppButton>
 			</AppForm>
-			<MessageSuccess v-if="userIsRegistered" />
+			<RegisterMessageSuccess v-else />
+			<RegisterMessageError class="u-margin-top-15" v-if="hasError" :message="errorMessage" />
 		</AppCard>
 	</div>
 </template>
@@ -31,7 +32,8 @@ import AppCard from '@/components/AppCard.vue';
 import AppHeadline from '@/components/AppHeadline.vue';
 import AppForm from '@/components/AppForm';
 import AppInput from '@/components/AppInput';
-import MessageSuccess from '@/components/MessageSuccess';
+import RegisterMessageSuccess from '@/components/RegisterMessageSuccess';
+import RegisterMessageError from '@/components/RegisterMessageError';
 
 export default {
 	components: {
@@ -40,13 +42,16 @@ export default {
 		AppHeadline,
 		AppForm,
 		AppInput,
-		MessageSuccess
+		RegisterMessageSuccess,
+		RegisterMessageError,
 	},
 	data() {
 		return {
 			email: '',
+			formWasSubmitted: false,
+			hasError: false,
+			errorMessage: '',
 			password: '',
-			userIsRegistered: false
 		}
 	},
 	methods: {
@@ -56,9 +61,11 @@ export default {
 					username: this.email,
 					password: this.password,
 				});
-				this.userIsRegistered = true;
+				this.hasError = false;
+				this.formWasSubmitted = true;
 			} catch (error) {
-				alert(error.message);
+				this.hasError = true;
+				this.errorMessage = error.message
 			}
 		},
 	}
@@ -73,6 +80,7 @@ export default {
 
 	&__card {
 		margin-top: rem-calc(100);
+		max-width: 425px;
 	}
 
 	&__label {
