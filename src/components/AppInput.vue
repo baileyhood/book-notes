@@ -1,6 +1,9 @@
 <template>
 	<input
-		class="c-input"
+		:class="[
+			'c-input',
+			widthClass
+		]"
 		:placeholder="placeholder"
 		:type="type"
 		:value="modelValue"
@@ -26,7 +29,16 @@ export default defineComponent({
 		type: {
 			type: String
 		},
+		width: {
+			type: Number
+		}
 	},
+
+	computed: {
+		widthClass(): string {
+			return `c-input--${this.width}-width`
+		}
+	}
 
 })
 </script>
@@ -39,9 +51,16 @@ export default defineComponent({
 	font-size: rem-calc(16);
 	margin-bottom: rem-calc(20);
 	padding: rem-calc(15) rem-calc(10);
+	width: 100%;
 
 	&::placeholder {
 		color: $color-primary-grey;
+	}
+}
+
+.c-input--50-width {
+	@include breakpoint('tablet-up') {
+		width: calc(50% - 10px);
 	}
 }
 </style>

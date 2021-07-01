@@ -1,31 +1,40 @@
 <template>
 	<div class="p-register">
 		<AppCard class="p-register__card">
-			<div v-if="false"  class="p-register__form-container">
+			<div v-if="!formWasSubmitted"  class="p-register__form-container">
 				<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
 				<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
 				<AppForm @submit.prevent="register">
+					<AppInput
+						placeholder="First name"
+						type="text"
+						v-model="firstName"
+						:width="50"
+					/>
+					<AppInput
+						placeholder="Last name"
+						type="text"
+						v-model="lastName"
+						:width="50"
+					/>
 					<AppInput 
-						placeholder="Enter email address"
+						placeholder="Email address"
 						type="email"
 						v-model="email"
 					/>
 					<AppInput
-						id="register-password-input"
-						placeholder="Enter password*"
+						placeholder="Password"
 						type="password"
 						v-model="password"
-						label="*must be at least 8 characters and include 1 special character"
 					/>
-					<label class="p-register__label" for="register-password-input">*must be at least 8 characters and include 1 special character</label>
 					<AppButton level="primary" type="submit">Register</AppButton>
 				</AppForm>
 			</div>
-			<div v-if="true" >
+			<div v-else >
 				<RegisterMessageSuccess/>
 				<AppButton linkTo="Login" level="primary">Login</AppButton>
 			</div>
-			<RegisterMessageError class="u-margin-top-15" v-if="hasError" :message="errorMessage" />
+			<RegisterMessageError v-if="hasError" class="u-margin-top-15"  :message="errorMessage" />
 		</AppCard>
 	</div>
 </template>
@@ -52,6 +61,8 @@ export default {
 	},
 	data() {
 		return {
+			firstName: '',
+			lastName: '',
 			email: '',
 			formWasSubmitted: false,
 			hasError: false,
@@ -65,6 +76,10 @@ export default {
 				await Auth.signUp({
 					username: this.email,
 					password: this.password,
+					attributes: {
+						'custom:firstName': this.firstName,
+						'custom:lastName': this.lastName,
+					}
 				});
 				this.hasError = false;
 				this.formWasSubmitted = true;

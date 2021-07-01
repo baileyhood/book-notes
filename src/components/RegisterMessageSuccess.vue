@@ -4,7 +4,7 @@
 		<p class="c-success-message__headline">
 			Successful!
 		</p>
-		<p>Your account was successfully created. Please login:</p>
+		<p>Your BookNotes account was successfully created. Let's login:</p>
 	</div>
 </template>
 

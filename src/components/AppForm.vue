@@ -14,6 +14,7 @@ export default defineComponent({
 <style lang="scss">
 .c-form {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 </style>
