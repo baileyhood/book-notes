@@ -1,7 +1,7 @@
 <template>
 	<div class="p-register">
 		<AppCard class="p-register__card">
-			<div v-if="!formWasSubmitted"  class="p-register__form-container">
+			<div v-if="false"  class="p-register__form-container">
 				<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
 				<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
 				<AppForm @submit.prevent="register">
@@ -21,9 +21,9 @@
 					<AppButton level="primary" type="submit">Register</AppButton>
 				</AppForm>
 			</div>
-			<div v-else >
+			<div v-if="true" >
 				<RegisterMessageSuccess/>
-				<AppButton level="primary">Login</AppButton>
+				<AppButton linkTo="Login" level="primary">Login</AppButton>
 			</div>
 			<RegisterMessageError class="u-margin-top-15" v-if="hasError" :message="errorMessage" />
 		</AppCard>
