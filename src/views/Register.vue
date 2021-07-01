@@ -28,6 +28,7 @@
 						v-model="password"
 					/>
 					<AppButton level="primary" type="submit">Register</AppButton>
+					<p class="p-register__sign-in-text">Already registered? <AppLink :to="{name: 'Login'}">Sign In</AppLink></p>
 				</AppForm>
 			</div>
 			<div v-else >
@@ -46,6 +47,7 @@ import AppCard from '@/components/AppCard.vue';
 import AppHeadline from '@/components/AppHeadline.vue';
 import AppForm from '@/components/AppForm';
 import AppInput from '@/components/AppInput';
+import AppLink from '@/components/AppLink';
 import RegisterMessageSuccess from '@/components/RegisterMessageSuccess';
 import RegisterMessageError from '@/components/RegisterMessageError';
 
@@ -56,6 +58,7 @@ export default {
 		AppHeadline,
 		AppForm,
 		AppInput,
+		AppLink,
 		RegisterMessageSuccess,
 		RegisterMessageError,
 	},
@@ -107,6 +110,11 @@ export default {
 		font-size: rem-calc(14);
 		font-style: italic;
 		margin-bottom: rem-calc(40);
+	}
+
+	&__sign-in-text {
+		margin-top: rem-calc(30);
+		width: 100%;
 	}
 
 	&__text {
