@@ -1,25 +1,30 @@
 <template>
 	<div class="p-register">
 		<AppCard class="p-register__card">
-			<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
-			<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
-			<AppForm v-if="!formWasSubmitted" @submit.prevent="register">
-				<AppInput 
-					placeholder="Enter email address"
-					type="email"
-					v-model="email"
-				/>
-				<AppInput
-					id="register-password-input"
-					placeholder="Enter password*"
-					type="password"
-					v-model="password"
-					label="*must be at least 8 characters and include 1 special character"
-				/>
-				<label class="p-register__label" for="register-password-input">*must be at least 8 characters and include 1 special character</label>
-				<AppButton level="primary">Register</AppButton>
-			</AppForm>
-			<RegisterMessageSuccess v-else />
+			<div v-if="!formWasSubmitted"  class="p-register__form-container">
+				<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
+				<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
+				<AppForm @submit.prevent="register">
+					<AppInput 
+						placeholder="Enter email address"
+						type="email"
+						v-model="email"
+					/>
+					<AppInput
+						id="register-password-input"
+						placeholder="Enter password*"
+						type="password"
+						v-model="password"
+						label="*must be at least 8 characters and include 1 special character"
+					/>
+					<label class="p-register__label" for="register-password-input">*must be at least 8 characters and include 1 special character</label>
+					<AppButton level="primary" type="submit">Register</AppButton>
+				</AppForm>
+			</div>
+			<div v-else >
+				<RegisterMessageSuccess/>
+				<AppButton level="primary">Login</AppButton>
+			</div>
 			<RegisterMessageError class="u-margin-top-15" v-if="hasError" :message="errorMessage" />
 		</AppCard>
 	</div>

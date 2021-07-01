@@ -36,6 +36,7 @@ style.<style lang="scss">
 	font-family: $font-primary;
 	font-size: rem-calc(20);
 	padding: rem-calc(15);
+	width: 100%;
 }
 
 .c-button--primary {
