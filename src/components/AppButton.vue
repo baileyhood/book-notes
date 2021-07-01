@@ -59,4 +59,8 @@ style.<style lang="scss">
 	background-color: $color-primary-yellow;
 	color: $color-primary-grey;
 }
+
+.c-button--secondary {
+	background-color: $color-primary-blue;
+}
 </style>

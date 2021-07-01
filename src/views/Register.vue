@@ -1,6 +1,6 @@
 <template>
 	<div class="p-register">
-		<AppCard class="p-register__card">
+		<AppCard class="p-register__card" max-width="425">
 			<div v-if="!formWasSubmitted"  class="p-register__form-container">
 				<AppHeadline level="1" size="1" :has-divider="true">BookNotes</AppHeadline>
 				<p class="p-register__text">Sign up for an account to get started with BookNotes</p>
@@ -103,7 +103,6 @@ export default {
 
 	&__card {
 		margin-top: rem-calc(100);
-		max-width: 425px;
 	}
 
 	&__label {
