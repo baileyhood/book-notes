@@ -48,6 +48,10 @@ export default {
 	font-size: rem-calc(50);
 }
 
+.c-headline-3 {
+	font-size: rem-calc(30);
+}
+
 .c-headline-divider {
 	position: relative;
 	margin-bottom: rem-calc(20);
