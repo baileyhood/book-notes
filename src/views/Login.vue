@@ -5,7 +5,7 @@
 			<p class="u-margin-bottom-30">Sign in below to access your dashboard</p>
 			<AppForm @submit.prevent="login">
 				<AppInput type="email" v-model="email" placeholder="Email address" />
-				<AppInput type="password" v-model="password" placeholder="Passowrd" />
+				<AppInput type="password" v-model="password" placeholder="Password" />
 				<AppButton type="submit" level="secondary">Login</AppButton>
 			</AppForm>
 		</AppCard>
@@ -42,7 +42,7 @@ export default {
 		async login() {
 				try {
 						await Auth.signIn(this.email, this.password);
-						alert('Successfully logged in');
+						this.$router.push({ name: 'Dashboard' });
 				} catch (error) {
 						alert(error.message);
 				}

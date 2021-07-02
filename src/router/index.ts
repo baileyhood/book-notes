@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Login from '../views/Login.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { Auth } from 'aws-amplify';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,12 +13,35 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Register',
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/Register.vue'),
-  }
+	},
+	{
+		path: '/dashboard',
+		name: 'Dashboard',
+		meta: {
+			requiresAuth: true
+		},
+		component: () =>
+      import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
+	}
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+//NOTE: Have to be logged into reach /dashboard page
+router.beforeEach(async (to, from, next) => {
+	const currentUser = await Auth.currentAuthenticatedUser()
+		.then(user => user)
+		.catch(() => false);
+	const requiresAuth = to.matched.some(record => record.meta.requiresAuth === true);
+	console.log('currentUser: ', currentUser);
+	if (requiresAuth && !currentUser) { // If not logged in
+		next('login');
+	} else {
+		next();
+	}
+});
 
 export default router

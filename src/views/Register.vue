@@ -40,18 +40,20 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { Auth } from 'aws-amplify';
 import AppButton from '@/components/AppButton.vue';
 import AppCard from '@/components/AppCard.vue';
 import AppHeadline from '@/components/AppHeadline.vue';
-import AppForm from '@/components/AppForm';
-import AppInput from '@/components/AppInput';
-import AppLink from '@/components/AppLink';
-import RegisterMessageSuccess from '@/components/RegisterMessageSuccess';
-import RegisterMessageError from '@/components/RegisterMessageError';
+import AppForm from '@/components/AppForm.vue';
+import AppInput from '@/components/AppInput.vue';
+import AppLink from '@/components/AppLink.vue';
+import RegisterMessageSuccess from '@/components/RegisterMessageSuccess.vue';
+import RegisterMessageError from '@/components/RegisterMessageError.vue';
 
-export default {
+export default defineComponent({
+	name: 'Register',
 	components: {
 		AppButton,
 		AppCard,
@@ -92,7 +94,7 @@ export default {
 			}
 		},
 	}
-}
+});
 </script>
 
 <style lang="scss">
