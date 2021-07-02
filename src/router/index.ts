@@ -36,7 +36,6 @@ router.beforeEach(async (to, from, next) => {
 		.then(user => user)
 		.catch(() => false);
 	const requiresAuth = to.matched.some(record => record.meta.requiresAuth === true);
-	console.log('currentUser: ', currentUser);
 	if (requiresAuth && !currentUser) { // If not logged in
 		next('login');
 	} else {

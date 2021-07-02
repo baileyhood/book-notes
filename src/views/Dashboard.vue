@@ -1,12 +1,17 @@
 <template>
 	<div>
-		<h1>Dashboard page</h1>
+		<Navigation/>
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
+import Navigation from '@/components/Navigation.vue';
+
 export default defineComponent({
-	name: 'Dashboard'
+	name: 'Dashboard',
+	components: {
+		Navigation
+	}
 })
 </script>
