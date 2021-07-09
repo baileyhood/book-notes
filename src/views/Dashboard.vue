@@ -5,13 +5,14 @@
 			<AppHeadline level="2" size="3">Bestsellers</AppHeadline>
 			<Swiper
 				navigation
-				:slides-per-view="3"
+				:slides-per-view="5"
 				:space-between="50"
 				>
 				<SwiperSlide 
 					v-for="(bestseller, index) in bestsellers" 
 					:key="index"
 				>
+					<img :src="bestseller.book_image" :alt="`${bestseller.title} book cover`">
 					{{ bestseller.title }}
 				</SwiperSlide>
 			</Swiper>
