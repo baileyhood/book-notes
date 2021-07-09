@@ -1,11 +1,20 @@
 <template>
 	<div>
-		<Navigation/>
+		<Nav/>
 		<main class="container">
 			<AppHeadline level="2" size="3">Bestsellers</AppHeadline>
-			<p v-for="(bestseller, index) in bestsellers" :key="index">
-				{{ bestseller.title }}
-			</p>
+			<Swiper
+				navigation
+				:slides-per-view="3"
+				:space-between="50"
+				>
+				<SwiperSlide 
+					v-for="(bestseller, index) in bestsellers" 
+					:key="index"
+				>
+					{{ bestseller.title }}
+				</SwiperSlide>
+			</Swiper>
 		</main>
 	</div>
 </template>
@@ -15,13 +24,24 @@ import { defineComponent } from 'vue';
 import { nytBestsellers } from '@/api/new-york-times';
 import axios from 'axios';
 import AppHeadline from '@/components/AppHeadline.vue'
-import Navigation from '@/components/Navigation.vue';
+import Nav from '@/components/Navigation.vue';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss'
+
+// install Swiper modules
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default defineComponent({
 	name: 'Dashboard',
 	components: {
 		AppHeadline,
-		Navigation
+		Nav,
+		Swiper,
+		SwiperSlide
 	},
 
 	data() {
