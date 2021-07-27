@@ -1,6 +1,15 @@
 <template>
-	<Swiper>
-		
+	<Swiper
+		navigation
+		:slides-per-view="slidesPerView"
+		:space-between="spaceBetween"
+	>
+		<SwiperSlide
+			v-for="(slideData, index) in sliderData" 
+			:key="index"
+		>
+			<slot :slideData="slideData"></slot>
+		</SwiperSlide>
 	</Swiper>
 </template>
 <script lang="ts">
@@ -17,9 +26,25 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default defineComponent({
 	name: 'Slider',
+
 	components: {
 		Swiper,
 		SwiperSlide
+	},
+
+	props: {
+		slidesPerView: {
+			type: Number,
+			required: true
+		},
+		spaceBetween: {
+			type: Number,
+			required: true
+		},
+		sliderData: {
+			type: Array,
+			required: true
+		}
 	}
 })
 </script>
