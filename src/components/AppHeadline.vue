@@ -44,12 +44,16 @@ export default {
 </script>
 
 <style lang="scss">
+$headline-margin-space: rem-calc(30);
+
 .c-headline-1 {
 	font-size: rem-calc(50);
+	margin-bottom: $headline-margin-space;
 }
 
 .c-headline-3 {
 	font-size: rem-calc(30);
+	margin-bottom: $headline-margin-space;
 }
 
 .c-headline-divider {
