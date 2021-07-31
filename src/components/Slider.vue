@@ -1,5 +1,6 @@
 <template>
 	<Swiper
+		class="c-slider"
 		navigation
 		:slides-per-view="slidesPerView"
 		:space-between="spaceBetween"
@@ -48,3 +49,35 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss">
+.c-slider {
+
+	@include breakpoint(tablet-up) {
+		padding: 0 rem-calc(40);
+	}
+
+	.swiper-button-prev,
+	.swiper-button-next {
+		// hide on mobile
+		display: none;
+
+		&::after {
+			color: $color-primary-grey;
+			font-size: rem-calc(20);
+		}
+
+		@include breakpoint(tablet-up) {
+			display: block;
+		}
+	}
+
+	.swiper-button-next {
+		right: -8px;
+	}
+
+	.swiper-button-prev {
+		left: -0;
+	}
+}
+</style>

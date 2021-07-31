@@ -5,7 +5,7 @@
 			<AppHeadline level="2" size="3">Bestsellers</AppHeadline>
 			<Slider
 				:sliderData="getBestsellers"
-				:slides-per-view="3"
+				:slides-per-view="2.5"
 				:space-between="10"
 				:cssMode="true"
 				:speed="100"
@@ -33,7 +33,9 @@ import { defineComponent } from 'vue';
 import AppHeadline from '@/components/AppHeadline.vue'
 import Nav from '@/components/Navigation.vue';
 import Slider from '@/components/Slider.vue';
-import { mapGetters, mapActions } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
+// All getters and actions namespaced to newYorkTimes module
+const { mapGetters, mapActions } = createNamespacedHelpers('newYorkTimes');
 
 export default defineComponent({
 	name: 'Dashboard',
