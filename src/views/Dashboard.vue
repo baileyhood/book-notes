@@ -24,6 +24,10 @@
 						>
 					</template>
 			</Slider>
+			<hr>
+			<input type="text" v-model="name" placeholder="Todo name">
+			<input type="text" v-model="description" placeholder="Todo description">
+			<button @click="createTodo">Create Todo</button>
 		</main>
 	</div>
 </template>
@@ -37,12 +41,23 @@ import { createNamespacedHelpers } from 'vuex';
 // All getters and actions namespaced to newYorkTimes module
 const { mapGetters, mapActions } = createNamespacedHelpers('newYorkTimes');
 
+import { API } from 'aws-amplify';
+import { createTodo } from '@/graphql/mutations';
+import { listTodos } from '@/graphql/queries';
+
 export default defineComponent({
 	name: 'Dashboard',
 	components: {
 		AppHeadline,
 		Nav,
 		Slider
+	},
+
+	data() {
+		return {
+			name: '',
+      description: ''
+		}
 	},
 
 	computed: {
@@ -54,11 +69,31 @@ export default defineComponent({
 	methods: {
 		...mapActions([
 			'fetchBestsellers'
-		])
+		]),
+
+		async createTodo() {
+      const { name, description } = this;
+      if (!name || !description) return;
+      const todo = { name, description };
+      await API.graphql({
+        query: createTodo,
+        variables: {input: todo},
+      });
+      this.name = '';
+      this.description = '';
+    },
+
+		async getTodos() {
+      const todos = await API.graphql({
+        query: listTodos
+      });
+			console.log(todos);
+    }
 	},
 
-	mounted() {
+	async mounted() {
 		this.fetchBestsellers();
+		this.getTodos();
 	}
 })
 </script>
