@@ -1,36 +1,39 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo($owner: String!) {
-    onCreateTodo(owner: $owner) {
+export const onCreateBook = /* GraphQL */ `
+  subscription OnCreateBook($owner: String!) {
+    onCreateBook(owner: $owner) {
       id
-      name
-      description
+      title
+      author
+      isbn
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo($owner: String!) {
-    onUpdateTodo(owner: $owner) {
+export const onUpdateBook = /* GraphQL */ `
+  subscription OnUpdateBook($owner: String!) {
+    onUpdateBook(owner: $owner) {
       id
-      name
-      description
+      title
+      author
+      isbn
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo($owner: String!) {
-    onDeleteTodo(owner: $owner) {
+export const onDeleteBook = /* GraphQL */ `
+  subscription OnDeleteBook($owner: String!) {
+    onDeleteBook(owner: $owner) {
       id
-      name
-      description
+      title
+      author
+      isbn
       createdAt
       updatedAt
       owner

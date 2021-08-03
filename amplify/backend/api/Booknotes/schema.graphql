@@ -1,8 +1,9 @@
-type Todo 
-	@model 
-	@auth(rules: [{ allow: owner }]) 
+type Book
+	@model
+	@auth(rules: [{ allow: owner }])
 {
-  id: ID!
-  name: String!
-  description: String
+	id: ID!
+	title: String!
+	author: String!
+	isbn: String!
 }

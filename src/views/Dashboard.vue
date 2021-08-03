@@ -25,8 +25,9 @@
 					</template>
 			</Slider>
 			<hr>
-			<input type="text" v-model="name" placeholder="Todo name">
-			<input type="text" v-model="description" placeholder="Todo description">
+			<input type="text" v-model="title" placeholder="Title">
+			<input type="text" v-model="isbn" placeholder="Isbn">
+			<input type="text" v-model="author" placeholder="Author">
 			<button @click="createTodo">Create Todo</button>
 		</main>
 	</div>
@@ -42,8 +43,8 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapActions } = createNamespacedHelpers('newYorkTimes');
 
 import { API } from 'aws-amplify';
-import { createTodo } from '@/graphql/mutations';
-import { listTodos } from '@/graphql/queries';
+import { createBook } from '@/graphql/mutations';
+import { listBooks } from '@/graphql/queries';
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -55,8 +56,9 @@ export default defineComponent({
 
 	data() {
 		return {
-			name: '',
-      description: ''
+			title: '',
+      isbn: '',
+			author: '',
 		}
 	},
 
@@ -72,28 +74,30 @@ export default defineComponent({
 		]),
 
 		async createTodo() {
-      const { name, description } = this;
-      if (!name || !description) return;
-      const todo = { name, description };
+      const { title, isbn, author } = this;
+      if (!title || !isbn || !author) return;
+      const book = { title, isbn, author };
       await API.graphql({
-        query: createTodo,
-        variables: {input: todo},
+        query: createBook,
+        variables: {input: book},
       });
-      this.name = '';
-      this.description = '';
+      this.title = '';
+      this.isbn = '';
+			this.author = '';
     },
 
 		async getTodos() {
-      const todos = await API.graphql({
-        query: listTodos
+      const books = API.graphql({
+        query: listBooks
       });
-			console.log(todos);
+			return books;
     }
 	},
 
 	async mounted() {
 		this.fetchBestsellers();
-		this.getTodos();
+		const books = await this.getTodos();
+		console.log(books);
 	}
 })
 </script>
