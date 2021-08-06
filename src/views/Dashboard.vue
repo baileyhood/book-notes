@@ -17,34 +17,28 @@
 				}"
 				>
 					<template v-slot:default="slotProps">
-						<img 
-							:src="slotProps.slideData.book_image" 
-							:alt="`${slotProps.slideData.title} book cover`"
-							class="p-dashboard__slider-image"
-						>
+						<button class="p-dashboard__slider-button" @click="addBookToReadLater(
+							slotProps.slideData.title,
+							slotProps.slideData.author,
+							slotProps.slideData?.isbns[0]?.isbn10
+						)">
+							<img 
+								:src="slotProps.slideData.book_image" 
+								:alt="`${slotProps.slideData.title} book cover`"
+								class="p-dashboard__slider-image"
+							>
+						</button>
 					</template>
 			</Slider>
-			<hr>
-			<input type="text" v-model="title" placeholder="Title">
-			<input type="text" v-model="isbn" placeholder="Isbn">
-			<input type="text" v-model="author" placeholder="Author">
-			<button @click="createTodo">Create Todo</button>
 		</main>
 	</div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import AppHeadline from '@/components/AppHeadline.vue'
 import Nav from '@/components/Navigation.vue';
 import Slider from '@/components/Slider.vue';
-import { createNamespacedHelpers } from 'vuex';
-// All getters and actions namespaced to newYorkTimes module
-const { mapGetters, mapActions } = createNamespacedHelpers('newYorkTimes');
-
-import { API } from 'aws-amplify';
-import { createBook } from '@/graphql/mutations';
-import { listBooks } from '@/graphql/queries';
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -63,47 +57,34 @@ export default defineComponent({
 	},
 
 	computed: {
-		...mapGetters([
-			'getBestsellers'
-		]),
+		getBestsellers() {
+			return this.$store.getters['newYorkTimes/getBestsellers'];
+		}
 	},
 
 	methods: {
-		...mapActions([
-			'fetchBestsellers'
-		]),
+		// ...mapActions({
+		// 	fetchBestsellers: 'newYorkTimes/fetchBestsellers'
+		// }),
 
-		async createTodo() {
-      const { title, isbn, author } = this;
-      if (!title || !isbn || !author) return;
-      const book = { title, isbn, author };
-      await API.graphql({
-        query: createBook,
-        variables: {input: book},
-      });
-      this.title = '';
-      this.isbn = '';
-			this.author = '';
-    },
-
-		async getTodos() {
-      const books = API.graphql({
-        query: listBooks
-      });
-			return books;
-    }
+		async addBookToReadLater(title:string, author:string, isbn:string) {
+			console.log('title:', title, author, isbn);
+		},
 	},
 
 	async mounted() {
-		this.fetchBestsellers();
-		const books = await this.getTodos();
-		console.log(books);
+		await this.$store.dispatch('newYorkTimes/fetchBestsellers');
 	}
 })
 </script>
 
 <style lang="scss">
 	.p-dashboard {
+		&__slider-button {
+			background-color: transparent;
+			border: none;
+		}
+
 		&__slider-image {
 			width: 100%;
 		}

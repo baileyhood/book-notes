@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBook = /* GraphQL */ `
-  mutation CreateBook(
-    $input: CreateBookInput!
-    $condition: ModelBookConditionInput
+export const createReadLaterBook = /* GraphQL */ `
+  mutation CreateReadLaterBook(
+    $input: CreateReadLaterBookInput!
+    $condition: ModelReadLaterBookConditionInput
   ) {
-    createBook(input: $input, condition: $condition) {
+    createReadLaterBook(input: $input, condition: $condition) {
       id
       title
       author
@@ -17,12 +17,12 @@ export const createBook = /* GraphQL */ `
     }
   }
 `;
-export const updateBook = /* GraphQL */ `
-  mutation UpdateBook(
-    $input: UpdateBookInput!
-    $condition: ModelBookConditionInput
+export const updateReadLaterBook = /* GraphQL */ `
+  mutation UpdateReadLaterBook(
+    $input: UpdateReadLaterBookInput!
+    $condition: ModelReadLaterBookConditionInput
   ) {
-    updateBook(input: $input, condition: $condition) {
+    updateReadLaterBook(input: $input, condition: $condition) {
       id
       title
       author
@@ -33,12 +33,12 @@ export const updateBook = /* GraphQL */ `
     }
   }
 `;
-export const deleteBook = /* GraphQL */ `
-  mutation DeleteBook(
-    $input: DeleteBookInput!
-    $condition: ModelBookConditionInput
+export const deleteReadLaterBook = /* GraphQL */ `
+  mutation DeleteReadLaterBook(
+    $input: DeleteReadLaterBookInput!
+    $condition: ModelReadLaterBookConditionInput
   ) {
-    deleteBook(input: $input, condition: $condition) {
+    deleteReadLaterBook(input: $input, condition: $condition) {
       id
       title
       author
