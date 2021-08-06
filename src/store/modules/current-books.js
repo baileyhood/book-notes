@@ -14,21 +14,28 @@ export default {
 	},
 	mutations: {
 		SET_BOOK_TO_LATER_LIST(state, book) {
-			state.readLaterList = book
+			state.readLaterList.push(...book)
 		}
 	},
 	actions: {
-		async fetchReadLaterList() {
-			const books = API.graphql({
+		async fetchReadLaterList(context) {
+			const booksData = await API.graphql({
 				query: listReadLaterBooks
 			});
-			return books;
+			const readLaterBooks = booksData.data.listReadLaterBooks.items;
+			context.commit('SET_BOOK_TO_LATER_LIST', readLaterBooks);
 		},
-		async addToReadLaterList(bookData) {
-      await API.graphql({
-        query: createReadLaterBook,
-        variables: {input: bookData},
-      });
+		async addToReadLaterList(context, bookData) {
+			try {
+				const readLaterBook = await API.graphql({
+					query: createReadLaterBook,
+					variables: {input: bookData},
+				});
+				context.commit('SET_BOOK_TO_LATER_LIST', [readLaterBook.data.createReadLaterBook]);
+			}
+			catch(error) {
+				console.error('Error: ', error);
+			}
 		}
 	}
 }

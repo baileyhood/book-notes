@@ -8,6 +8,7 @@ export const getReadLaterBook = /* GraphQL */ `
       title
       author
       isbn
+      image
       createdAt
       updatedAt
       owner
@@ -26,6 +27,7 @@ export const listReadLaterBooks = /* GraphQL */ `
         title
         author
         isbn
+        image
         createdAt
         updatedAt
         owner

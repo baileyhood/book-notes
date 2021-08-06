@@ -8,6 +8,7 @@ export const onCreateReadLaterBook = /* GraphQL */ `
       title
       author
       isbn
+      image
       createdAt
       updatedAt
       owner
@@ -21,6 +22,7 @@ export const onUpdateReadLaterBook = /* GraphQL */ `
       title
       author
       isbn
+      image
       createdAt
       updatedAt
       owner
@@ -34,6 +36,7 @@ export const onDeleteReadLaterBook = /* GraphQL */ `
       title
       author
       isbn
+      image
       createdAt
       updatedAt
       owner

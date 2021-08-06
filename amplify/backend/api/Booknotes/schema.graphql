@@ -6,4 +6,5 @@ type ReadLaterBook
 	title: String!
 	author: String!
 	isbn: String!
+	image: String!
 }
