@@ -11,7 +11,7 @@
 	</component>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
 			type: String,
 			required: true,
 			default: 'primary',
-			validator: (value:string) => [
+			validator: (value) => [
 				'primary',
 				'secondary',
 				'tertiary'
@@ -35,7 +35,7 @@ export default defineComponent({
 	},
 
 	computed: {
-		type(): string {
+		type() {
 			return this.linkTo ? 'router-link' : 'button';
 		}
 	}

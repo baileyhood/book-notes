@@ -13,7 +13,7 @@
 		</SwiperSlide>
 	</Swiper>
 </template>
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';

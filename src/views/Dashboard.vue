@@ -67,7 +67,7 @@ export default defineComponent({
 		// 	fetchBestsellers: 'newYorkTimes/fetchBestsellers'
 		// }),
 
-		async addBookToReadLater(title:string, author:string, isbn:string) {
+		async addBookToReadLater(title, author, isbn) {
 			console.log('title:', title, author, isbn);
 		},
 	},

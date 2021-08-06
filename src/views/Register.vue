@@ -40,7 +40,7 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import { Auth } from 'aws-amplify';
 import AppButton from '@/components/AppButton.vue';

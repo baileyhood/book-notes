@@ -11,7 +11,7 @@
 	/>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -35,7 +35,7 @@ export default defineComponent({
 	},
 
 	computed: {
-		widthClass(): string {
+		widthClass() {
 			return `c-input--${this.width}-width`
 		}
 	}
