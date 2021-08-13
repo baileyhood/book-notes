@@ -17,11 +17,17 @@
 				}"
 				>
 					<template v-slot:default="slotProps">
-						<img
-							:src="slotProps.slideData.image" 
-							:alt="`${slotProps.slideData.title} book cover`"
-							class="p-dashboard__slider-image"
-						>
+						<div class="p-dashboard__slide-container">
+							<button class="p-dashboard__slide-button" @click="removeFromReadLater(slotProps.slideData)">
+								<img class="p-dashboard__slide-button-icon" src="@/assets/img/icons/icon-delete.svg" alt="Delete icon">
+								Remove from Read Later List
+							</button>
+							<img
+								:src="slotProps.slideData.image" 
+								:alt="`${slotProps.slideData.title} book cover`"
+								class="p-dashboard__slider-image"
+							>
+						</div>
 					</template>
 			</Slider>
 			<hr>
@@ -65,16 +71,11 @@ import Slider from '@/components/Slider.vue';
 
 export default defineComponent({
 	name: 'Dashboard',
+	
 	components: {
 		AppHeadline,
 		Nav,
 		Slider
-	},
-
-	data() {
-		return {
-			hoverIsActive: false
-		}
 	},
 
 	computed: {
@@ -83,7 +84,7 @@ export default defineComponent({
 		},
 
 		getReadLater() {
-			return this.$store.getters['currentBooks/getReadLaterList']
+			return this.$store.getters['currentBooks/getReadLaterList'];
 		}
 	},
 
@@ -97,8 +98,11 @@ export default defineComponent({
 			})
 		},
 
-		hoverHandle() {
-			this.hoverIsActive = !this.hoverIsActive;
+		removeFromReadLater(slideData) {
+			console.log(this.$store);
+			this.$store.dispatch('currentBooks/removeFromReadLaterList', {
+				id: slideData.id
+			})
 		}
 	},
 
