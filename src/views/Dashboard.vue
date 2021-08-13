@@ -17,17 +17,15 @@
 				}"
 				>
 					<template v-slot:default="slotProps">
-						<button class="p-dashboard__slider-button">
-							<img 
-								:src="slotProps.slideData.image" 
-								:alt="`${slotProps.slideData.title} book cover`"
-								class="p-dashboard__slider-image"
-							>
-						</button>
+						<img
+							:src="slotProps.slideData.image" 
+							:alt="`${slotProps.slideData.title} book cover`"
+							class="p-dashboard__slider-image"
+						>
 					</template>
 			</Slider>
 			<hr>
-			<AppHeadline level="2" size="3">Bestsellers</AppHeadline>
+			<AppHeadline level="2" size="3">New York Times Bestsellers</AppHeadline>
 			<Slider
 				:sliderData="getBestsellers"
 				:slides-per-view="2.5"
@@ -42,13 +40,17 @@
 				}"
 				>
 					<template v-slot:default="slotProps">
-						<button class="p-dashboard__slider-button" @click="addBookToReadLater($event, slotProps.slideData)">
-							<img 
+						<div class="p-dashboard__slide-container">
+							<button class="p-dashboard__slide-button" @click="addBookToReadLater($event, slotProps.slideData)">
+								<img class="p-dashboard__slide-button-icon" src="@/assets/img/icons/icon-plus-sign.svg" alt="Plus sign icon">
+								Add to your Read Later list
+							</button>
+							<img
 								:src="slotProps.slideData.book_image" 
 								:alt="`${slotProps.slideData.title} book cover`"
 								class="p-dashboard__slider-image"
 							>
-						</button>
+						</div>
 					</template>
 			</Slider>
 		</main>
@@ -67,6 +69,12 @@ export default defineComponent({
 		AppHeadline,
 		Nav,
 		Slider
+	},
+
+	data() {
+		return {
+			hoverIsActive: false
+		}
 	},
 
 	computed: {
@@ -88,6 +96,10 @@ export default defineComponent({
 				image: slideData.book_image
 			})
 		},
+
+		hoverHandle() {
+			this.hoverIsActive = !this.hoverIsActive;
+		}
 	},
 
 	async mounted() {
@@ -99,10 +111,34 @@ export default defineComponent({
 
 <style lang="scss">
 	.p-dashboard {
-		&__slider-button {
-			background-color: transparent;
+
+		&__slide-button {
+			align-items: center;
+			background-color: $color-primary-yellow-hover;
 			border: none;
-			pointer-events: cursor;
+			cursor: pointer;
+			display: flex;
+			height: 100%;
+			justify-content: center;
+			position: absolute;
+			transition: opacity .1s ease-in;
+			width: 100%;
+			opacity: 0;
+		}
+
+		&__slide-button-icon {
+			margin-right: rem-calc(10);
+			max-width: 20px;
+		}
+
+		&__slide-container {
+			position: relative;
+
+			&:hover {
+				.p-dashboard__slide-button {
+					opacity: 1;
+				}
+			}
 		}
 
 		&__slider-image {
