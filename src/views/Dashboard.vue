@@ -47,7 +47,10 @@
 				>
 					<template v-slot:default="slotProps">
 						<div class="p-dashboard__slide-container">
-							<button class="p-dashboard__slide-button" @click="addBookToReadLater($event, slotProps.slideData)">
+							<button 
+								class="p-dashboard__slide-button" 
+								@click="addBookToReadLater($event, slotProps.slideData)"
+								:disabled="isLoading">
 								<img class="p-dashboard__slide-button-icon" src="@/assets/img/icons/icon-plus-sign.svg" alt="Plus sign icon">
 								Add to your Read Later list
 							</button>
@@ -85,6 +88,10 @@ export default defineComponent({
 
 		getReadLater() {
 			return this.$store.getters['currentBooks/getReadLaterList'];
+		},
+
+		isLoading() {
+			return this.$store.getters['userInterface/getLoadingStatus'];
 		}
 	},
 
@@ -103,7 +110,11 @@ export default defineComponent({
 			this.$store.dispatch('currentBooks/removeFromReadLaterList', {
 				id: slideData.id
 			})
-		}
+		},
+
+		// isDuplicateReadLater() {
+		// 	return this.getReadLater
+		// }
 	},
 
 	async mounted() {

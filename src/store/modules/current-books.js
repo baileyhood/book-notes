@@ -2,6 +2,12 @@ import { API } from 'aws-amplify';
 import { createReadLaterBook, deleteReadLaterBook } from '@/graphql/mutations';
 import { listReadLaterBooks } from '@/graphql/queries';
 
+const isDuplicate = (bookList, isbn) => {
+	const isbnList = bookList.map((bookData) => bookData.isbn);
+	console.log(isbnList.includes(isbn));
+	return isbnList.includes(isbn);
+}
+
 export default {
 	namespaced: true,
 	state: {
@@ -30,7 +36,9 @@ export default {
 			const readLaterBooks = booksData.data.listReadLaterBooks.items;
 			context.commit('SET_BOOK_TO_LATER_LIST', readLaterBooks);
 		},
-		async addToReadLaterList(context, bookData) {
+		async addToReadLaterList({commit, state}, bookData) {
+			if (isDuplicate(state.readLaterList, bookData.isbn)) return;
+			commit('userInterface/SET_LOADING_STATUS', true, { root: true });
 			try {
 				const readLaterBook = await API.graphql({
 					query: createReadLaterBook,
@@ -38,10 +46,12 @@ export default {
 						input: bookData
 					}
 				});
-				context.commit('SET_BOOK_TO_LATER_LIST', [readLaterBook.data.createReadLaterBook]);
+				commit('SET_BOOK_TO_LATER_LIST', [readLaterBook.data.createReadLaterBook]);
+				commit('userInterface/SET_LOADING_STATUS', false, { root: true });
 			}
 			catch(error) {
 				console.error('Error: ', error);
+				commit('userInterface/SET_LOADING_STATUS', false, { root: true });
 			}
 		},
 		async removeFromReadLaterList(context, bookData) {
